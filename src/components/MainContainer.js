@@ -3,15 +3,31 @@ import Card from './Card'
 import ButtonContainer from './ButtonContainer';
 import DeckContainer from './DeckContainer';
 import SubDeck from './SubDeck';
+import axios from 'axios';
+
+
 
 const data = require('../db/db.json');
 
 const MainContainer = () => {
 
+  useEffect(() => {
+    // Fetch flashcards from the backend API
+    axios.get('/api/flashcards')
+      .then((response) => {
+        // Assuming the response data is an array of flashcards
+        const flashcardDecks = response.data;
+        // Set the state with the fetched data
+        // ... (update the state as per your original implementation)
+      })
+      .catch((error) => {
+        console.error('Error fetching flashcards:', error);
+        // Handle error appropriately
+      });
+  }, []);
+
   const flashcardDecks = data['flashcard_decks'];
   
-  // useState for current deck from flashcardDecks
-  // send flashcardDecks to DeckContainer
   const [currentDeck, setCurrentDeck] = useState(0);
 
   const questionArr = flashcardDecks[currentDeck]["flashcards"];

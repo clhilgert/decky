@@ -168,11 +168,13 @@ body {
 
 .delete-button:hover {
   background-color: rgb(233, 179, 179);
+  cursor: pointer;
 }
 
 .delete-button:active {
   background-color: rgb(235, 135, 135);
   width: 59px;
+
 }
 
 .input-container {
