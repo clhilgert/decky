@@ -73,7 +73,7 @@ const MainContainer = () => {
         <Card clickHandler={flipCard} displayText={displayText} count={currentCard + 1} total={questionArr.length} />
       </div>
       <ButtonContainer clickHandler={changeCard} />
-      {/* <DeckContainer decks={flashcardDecks} clickHandler={changeDeck} /> */}
+      <DeckContainer decks={data} clickHandler={changeDeck} />
       {showSubDeck && <SubDeck cards={questionArr} />}
     </div>
   );
