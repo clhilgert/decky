@@ -3,37 +3,30 @@ import Card from './Card'
 import ButtonContainer from './ButtonContainer';
 import DeckContainer from './DeckContainer';
 import SubDeck from './SubDeck';
-import axios from 'axios';
-
-
-
-const data = require('../db/db.json');
 
 const MainContainer = () => {
 
+  const [data, setData] = useState([]);
+  const [currentDeck, setCurrentDeck] = useState(0);
+  const [currentCard, setCurrentCard] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [showSubDeck, setShowSubDeck] = useState(false);
+
   useEffect(() => {
-    axios.get('/api/flashcards')
-      .then((response) => {
-        const flashcardDecks = response.data;
+    fetch('http://localhost:5000/api/decks')
+      .then(response => response.json())
+      .then(reqData => {
+        setData(reqData);
+        // Data is updated and available here, so you can log it correctly.
+        console.log(reqData);
       })
-      .catch((error) => {
-        console.error('Error fetching flashcards:', error);
-      });
+      .catch(error => console.error(error));
   }, []);
 
-  
-  const [currentDeck, setCurrentDeck] = useState(0);
-
-  const questionArr = flashcardDecks[currentDeck]["flashcards"];
-
-  const [currentCard, setCurrentCard] = useState(0);
-
-  const question = questionArr[currentCard]["question"];
-  const answer = questionArr[currentCard]["answer"];
-
-  const [displayText, setDisplayText] = useState(question);
-
-  const [showSubDeck, setShowSubDeck] = useState(false);
+  // Check if data has been loaded and the required properties exist
+  const questionArr = data[currentDeck]?.flashcards || [];
+  const question = questionArr[currentCard]?.question || '';
+  const answer = questionArr[currentCard]?.answer || '';
 
   useEffect(() => {
     setDisplayText(questionArr[currentCard]["question"]);
@@ -61,10 +54,10 @@ const MainContainer = () => {
     <div className='outer-container'>
       <h1 className='title-text'>decky</h1>
       <div className='MainContainer'>
-        <Card clickHandler={flipCard} displayText={displayText} count={currentCard + 1} total={questionArr.length}/>
+        <Card clickHandler={flipCard} displayText={displayText} count={currentCard + 1} total={questionArr.length} />
       </div>
-      <ButtonContainer clickHandler={changeCard}/>
-      <DeckContainer decks={flashcardDecks} clickHandler={changeDeck}/>
+      <ButtonContainer clickHandler={changeCard} />
+      {/* <DeckContainer decks={flashcardDecks} clickHandler={changeDeck} /> */}
       {showSubDeck && <SubDeck cards={questionArr} />}
     </div>
 
