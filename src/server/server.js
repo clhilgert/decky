@@ -7,8 +7,6 @@ const app = express();
 app.use(cors());
 const PORT = 5000;
 
-
-
 mongoose.connect('mongodb+srv://clhilgert:xdxblRkWtfc2ySyq@cluster0.ecdzfa9.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -44,8 +42,8 @@ app.post('/api/decks/:deckId', async (req, res) => {
 
 app.get('/api/decks/', async (req, res) => {
   try {
-    const decks = await Deck.find(); // Fetch all decks from the database
-    res.json(decks); // Send the decks as a JSON response
+    const decks = await Deck.find(); 
+    res.json(decks); 
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' });
   }

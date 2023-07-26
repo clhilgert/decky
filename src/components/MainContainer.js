@@ -1,53 +1,69 @@
 import React, { useEffect, useState } from 'react';
-import Card from './Card'
+import Card from './Card';
 import ButtonContainer from './ButtonContainer';
 import DeckContainer from './DeckContainer';
 import SubDeck from './SubDeck';
 
 const MainContainer = () => {
-
   const [data, setData] = useState([]);
   const [currentDeck, setCurrentDeck] = useState(0);
   const [currentCard, setCurrentCard] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [showSubDeck, setShowSubDeck] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [questionArr, setQuestionArr] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/decks')
-      .then(response => response.json())
-      .then(reqData => {
-        setData(reqData);
-        // Data is updated and available here, so you can log it correctly.
-        console.log(reqData);
-      })
-      .catch(error => console.error(error));
+    async function fetchData() {
+      try {
+        const response = await fetch('http://localhost:5000/api/decks');
+        const resData = await response.json();
+        setData(resData);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
   }, []);
 
-  // Check if data has been loaded and the required properties exist
-  const questionArr = data[currentDeck]?.flashcards || [];
-  const question = questionArr[currentCard]?.question || '';
-  const answer = questionArr[currentCard]?.answer || '';
+  useEffect(() => {
+    if (data.length > 0) {
+      const currentDeckData = data[currentDeck];
+      if (currentDeckData) {
+        setQuestionArr(currentDeckData.flashcards);
+        setCurrentCard(0);
+      }
+    }
+  }, [currentDeck, data]);
 
   useEffect(() => {
-    setDisplayText(questionArr[currentCard]["question"]);
+    setDisplayText(questionArr[currentCard]?.question || '');
   }, [currentCard, questionArr]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   function changeDeck(index) {
     setCurrentDeck(index);
-    setCurrentCard(0);
     setShowSubDeck(!showSubDeck);
   }
 
   function changeCard(nav) {
     if (nav === 'back') {
-      setCurrentCard((prevCard) => prevCard === 0 ? questionArr.length - 1 : prevCard - 1);
+      setCurrentCard((prevCard) => (prevCard === 0 ? questionArr.length - 1 : prevCard - 1));
     } else if (nav === 'forwards') {
       setCurrentCard((prevCard) => (prevCard + 1) % questionArr.length);
     }
   }
 
   function flipCard() {
-    setDisplayText(displayText === question ? answer : question)
+    setDisplayText((displayText) =>
+      displayText === questionArr[currentCard]?.question ? questionArr[currentCard]?.answer : questionArr[currentCard]?.question
+    );
   }
 
   return (
@@ -60,8 +76,8 @@ const MainContainer = () => {
       {/* <DeckContainer decks={flashcardDecks} clickHandler={changeDeck} /> */}
       {showSubDeck && <SubDeck cards={questionArr} />}
     </div>
-
   );
 };
 
 export default MainContainer;
+
