@@ -1,0 +1,95 @@
+{
+  "flashcard_decks": [
+    {
+      "deck_name": "General Knowledge",
+      "flashcards": [
+        {
+          "question": "What is the capital of France?",
+          "answer": "Paris"
+        },
+        {
+          "question": "Who wrote the play 'Romeo and Juliet'?",
+          "answer": "William Shakespeare"
+        },
+        {
+          "question": "What is the chemical symbol for water?",
+          "answer": "H2O"
+        },
+        {
+          "question": "Which planet is known as the 'Red Planet'?",
+          "answer": "Mars"
+        },
+        {
+          "question": "What is the largest mammal in the world?",
+          "answer": "Blue Whale"
+        },
+        {
+          "question": "Who painted the Mona Lisa?",
+          "answer": "Leonardo da Vinci"
+        },
+        {
+          "question": "What is the tallest mountain in the world?",
+          "answer": "Mount Everest"
+        },
+        {
+          "question": "Which country is known as the Land of the Rising Sun?",
+          "answer": "Japan"
+        },
+        {
+          "question": "What is the chemical symbol for gold?",
+          "answer": "Au"
+        },
+        {
+          "question": "What is the primary language spoken in Brazil?",
+          "answer": "Portuguese"
+        }
+      ]
+    },
+    {
+      "deck_name": "Science Trivia",
+      "flashcards": [
+        {
+          "question": "What is the process by which plants convert light into energy?",
+          "answer": "Photosynthesis"
+        },
+        {
+          "question": "What is the symbol for the element oxygen?",
+          "answer": "O"
+        },
+        {
+          "question": "Which gas do plants primarily absorb from the atmosphere during photosynthesis?",
+          "answer": "Carbon dioxide (CO2)"
+        },
+        {
+          "question": "What is the chemical formula for methane gas?",
+          "answer": "CH4"
+        },
+        {
+          "question": "Which scientist proposed the theory of general relativity?",
+          "answer": "Albert Einstein"
+        },
+        {
+          "question": "What is the smallest unit of an element that retains its properties?",
+          "answer": "Atom"
+        },
+        {
+          "question": "What type of energy is stored in the nucleus of an atom?",
+          "answer": "Nuclear energy"
+        },
+        {
+          "question": "What is the name of the brightest star in the night sky?",
+          "answer": "Sirius"
+        },
+        {
+          "question": "Which planet has the most extensive ring system in our solar system?",
+          "answer": "Saturn"
+        },
+        {
+          "question": "What is the SI unit of electric current?",
+          "answer": "Ampere (A)"
+        }
+      ]
+    }
+  ]
+}
+

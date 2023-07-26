@@ -1,0 +1,210 @@
+.title-text {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+}
+
+body {
+  font-family: 'Coming Soon', cursive;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(46,1,150,1) 35%, rgba(145,0,255,1) 82%);
+  color: white;
+}
+
+.outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.MainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #A076F9;
+  height: 300px;
+  width: 410px;
+  box-shadow: 1px 2px 4px rgb(197, 165, 192);
+  margin: 0 auto;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 20px;
+  height: 220px;
+  width: 350px;
+  background-image: url('./static/Notecard.jpg');
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  box-shadow: 1px 2px 4px rgb(237, 228, 255);
+  transition: 0.4s;
+}
+
+.card:hover {
+  /* transform: rotateY(15deg); */
+  filter: blur(0.5px);
+  filter: drop-shadow(2px 2px 2px rgb(0, 0, 0)) invert(10%);
+}
+
+.card:active {
+  transform: rotateY(180deg);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.nav-button {
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: #A076F9;
+  background-color:#D7BBF5;
+  font-size: 30px;
+  transition: 0.2s;
+}
+
+.nav-button:hover {
+  background-color:#e7d2fd;
+  width: 180px;
+}
+
+.nav-button:active {
+  width: 170px;
+  background-color:#ffffff;
+}
+
+.counter-text {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0px;
+}
+
+.deck-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgb(5, 1, 78) 0%, rgb(109, 83, 168) 35%, rgb(117, 55, 165) 82%);
+  width: 330px;
+  height: 74px;
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 1px 1px 4px rgb(0, 0, 0);
+}
+
+.deck-container:hover {
+  overflow-x: auto;
+}
+
+.deck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: white;
+  font-size: 11px;
+  width: 100px;
+  height: 62px;
+  border-radius: 20px;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 1px 1px 2px rgb(76, 62, 80);
+  transition: background-color 0.3s;
+}
+
+.deck:hover {
+  cursor: pointer;
+  background-color: #D7BBF5;
+}
+
+.sub-deck {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.sub-deck-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.sub-deck-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 8px; 
+}
+
+.card-content {
+  flex: 1; 
+}
+
+.delete-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-button {
+  width: 60px;
+  border-style: solid;
+  background-color: white;
+  border-radius: 10px;
+  transition: background-color 0.1s;
+}
+
+.delete-button:hover {
+  background-color: rgb(233, 179, 179);
+}
+
+.delete-button:active {
+  background-color: rgb(235, 135, 135);
+  width: 59px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.question-box,
+.answer-box {
+  text-align: center;
+  border-style: solid;
+  margin-bottom: 3px;
+  border-radius: 10px;
+}
+
+.add-card-button {
+  color: white;
+  background-color: #8d4ed1;
+  text-align: center;
+  border-style: solid;
+  margin-bottom: 3px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.add-card-button:hover {
+  cursor: pointer;
+  background-color: #a171d4;
+}
+
+.add-card-button:active {
+  width: 85px;
+}
