@@ -12,21 +12,15 @@ const data = require('../db/db.json');
 const MainContainer = () => {
 
   useEffect(() => {
-    // Fetch flashcards from the backend API
     axios.get('/api/flashcards')
       .then((response) => {
-        // Assuming the response data is an array of flashcards
         const flashcardDecks = response.data;
-        // Set the state with the fetched data
-        // ... (update the state as per your original implementation)
       })
       .catch((error) => {
         console.error('Error fetching flashcards:', error);
-        // Handle error appropriately
       });
   }, []);
 
-  const flashcardDecks = data['flashcard_decks'];
   
   const [currentDeck, setCurrentDeck] = useState(0);
 
@@ -62,9 +56,6 @@ const MainContainer = () => {
   function flipCard() {
     setDisplayText(displayText === question ? answer : question)
   }
-
-
-
 
   return (
     <div className='outer-container'>

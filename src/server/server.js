@@ -18,6 +18,11 @@ const flashcardSchema = new mongoose.Schema({
   answer: String,
 });
 
+const deckSchema = new mongoose.Schema({
+  name: String,
+  flashcards: [flashcardSchema],
+});
+
 const Flashcard = mongoose.model('Flashcard', flashcardSchema);
 
 app.use(bodyParser.json());
