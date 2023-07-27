@@ -9,6 +9,11 @@ body {
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(46,1,150,1) 35%, rgba(145,0,255,1) 82%);
   color: white;
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .outer-container {
@@ -97,16 +102,18 @@ body {
   align-items: center;
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgb(5, 1, 78) 0%, rgb(109, 83, 168) 35%, rgb(117, 55, 165) 82%);
-  width: 330px;
   height: 74px;
+  padding: 4px;
   margin-top: 20px;
   border-radius: 20px;
   box-shadow: 1px 1px 4px rgb(0, 0, 0);
+  margin-bottom: 10px;
+  gap: 4px;
 }
 
-.deck-container:hover {
+/* .deck-container:hover {
   overflow-x: auto;
-}
+} */
 
 .deck {
   display: flex;
@@ -209,4 +216,24 @@ body {
 
 .add-card-button:active {
   width: 85px;
+}
+
+.delete-deck-button {
+  color: white;
+  background-color: #d1524e;
+  text-align: center;
+  border-style: solid;
+  margin-bottom: 3px;
+  width: 90px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.delete-deck-button:hover {
+  cursor: pointer;
+  background-color: #d6351f;
+}
+
+.delete-deck-button:active {
+  width: 92px;
 }

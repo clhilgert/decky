@@ -1,10 +1,9 @@
 import React from 'react';
 
 
-const SubDeck = ({ cards }) => {
-  console.log(cards);
-
+const SubDeck = ({ cards, name, clickHandlerDelete }) => {
   return (
+
     <div className='sub-deck'>
       <div className='sub-deck-component'>
         {cards.map((card) => (
@@ -20,7 +19,8 @@ const SubDeck = ({ cards }) => {
           <div className='input-container'>
         <input className='question-box' placeholder='question...' />
         <input className='answer-box' placeholder='answer...' />
-        <button className='add-card-button'>+ Add Card</button>
+        <button className='add-card-button' onClick={() => addCard(name)}>+ Add Card</button>
+        <button className='delete-deck-button' onClick={() => clickHandlerDelete(name)}>Delete Deck</button>
         </div>
       </div>
     </div>

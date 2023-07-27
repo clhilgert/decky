@@ -5,7 +5,6 @@ const fetchDecks = async () => {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    console.log(data); // Log the response data to check its contents
   } catch (error) {
     console.error('Error fetching decks:', error);
   }

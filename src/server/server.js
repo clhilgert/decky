@@ -29,7 +29,25 @@ const Flashcard = mongoose.model('Flashcard', flashcardSchema);
 const Deck = mongoose.model('Deck', deckSchema);
 app.use(bodyParser.json());
 
-app.post('/api/decks/:deckId', async (req, res) => {
+// app.post('/api/decks/addcard', async (req, res) => {
+//   try {
+    
+//   }
+// })
+
+app.post('/api/decks/delete', async (req, res) => {
+  try {
+    const { name } = req.body;
+    console.log(name, 'name')
+    const deleteDeck = await Deck.findOneAndDelete({ name: name });
+    res.status(200).json({ message: 'Deck deleted successfully' });
+  } catch (err) {
+    console.error('Error while deleting deck:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post('/api/decks/add', async (req, res) => {
   try {
     const { name, flashcards } = req.body;
     const newDeck = new Deck({ name, flashcards });
@@ -50,6 +68,9 @@ app.get('/api/decks/', async (req, res) => {
 });
 
 
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = Deck;

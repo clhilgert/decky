@@ -4,6 +4,7 @@ import ButtonContainer from './ButtonContainer';
 import DeckContainer from './DeckContainer';
 import SubDeck from './SubDeck';
 
+
 const MainContainer = () => {
   const [data, setData] = useState([]);
   const [currentDeck, setCurrentDeck] = useState(0);
@@ -66,15 +67,60 @@ const MainContainer = () => {
     );
   }
 
+  function addDeck() {
+    let count = 0;
+    data.forEach(el => {
+      if (el.name.includes('New Deck')) count++;
+    })
+    fetch('http://localhost:5000/api/decks/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: `New Deck ${count + 1}` })
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(newDeck => {
+      const newData = [...data];
+      newData.push(newDeck);
+      setData(newData);
+    })
+  }
+
+  function deleteDeck(name) {
+    fetch('http://localhost:5000/api/decks/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: name })
+    })
+    .then(response => {
+      refreshPage();
+      return response.json()
+    })
+  }
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
+  function addCard() {
+
+  }
+
   return (
+    
     <div className='outer-container'>
       <h1 className='title-text'>decky</h1>
       <div className='MainContainer'>
         <Card clickHandler={flipCard} displayText={displayText} count={currentCard + 1} total={questionArr.length} />
       </div>
       <ButtonContainer clickHandler={changeCard} />
-      <DeckContainer decks={data} clickHandler={changeDeck} />
-      {showSubDeck && <SubDeck cards={questionArr} />}
+      <DeckContainer decks={data} clickHandler={changeDeck} clickHandlerAlt={addDeck}/>
+      {showSubDeck && <SubDeck cards={questionArr} name={data[currentDeck].name} clickHandlerDelete={deleteDeck}/>}
     </div>
   );
 };
