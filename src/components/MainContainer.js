@@ -107,9 +107,22 @@ const MainContainer = () => {
     window.location.reload(false);
   }
 
-  function addCard() {
-
+  function addCard(name, question, answer) {
+    fetch('http://localhost:5000/api/decks/addcard', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: name, question: question, answer: answer })
+    })
+    .then(response => {
+      return response.json();
+    })
   }
+
+  // function deleteCard(name) {
+
+  // }
 
   return (
     
@@ -120,7 +133,7 @@ const MainContainer = () => {
       </div>
       <ButtonContainer clickHandler={changeCard} />
       <DeckContainer decks={data} clickHandler={changeDeck} clickHandlerAlt={addDeck}/>
-      {showSubDeck && <SubDeck cards={questionArr} name={data[currentDeck].name} clickHandlerDelete={deleteDeck}/>}
+      {showSubDeck && <SubDeck cards={questionArr} name={data[currentDeck].name} clickHandlerDelete={deleteDeck} clickHandlerAddCard={addCard} />}
     </div>
   );
 };

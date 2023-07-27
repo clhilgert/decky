@@ -29,11 +29,23 @@ const Flashcard = mongoose.model('Flashcard', flashcardSchema);
 const Deck = mongoose.model('Deck', deckSchema);
 app.use(bodyParser.json());
 
-// app.post('/api/decks/addcard', async (req, res) => {
-//   try {
-    
-//   }
-// })
+app.post('/api/decks/addcard', async (req, res) => {
+  try {
+    const { name, question, answer } = req.body;
+    console.log(name, question, answer);
+    const deck = await Deck.findOne({ name });
+    const newFlashcard = new Flashcard({
+      question: question,
+      answer: answer,
+    });
+    deck.flashcards.push(newFlashcard);
+    await deck.save();
+    return res.status(200).json(deck);
+  } catch (err) {
+    console.err('error adding flashcard:', err)
+    return res.status(500).json({message: 'error'})
+  }
+})
 
 app.post('/api/decks/delete', async (req, res) => {
   try {

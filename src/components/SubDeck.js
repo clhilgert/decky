@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
-const SubDeck = ({ cards, name, clickHandlerDelete }) => {
+const SubDeck = ({ cards, name, clickHandlerDelete, clickHandlerAddCard }) => {
+  
+const [question, setQuestion] = useState('');
+const [answer, setAnswer] = useState('');
   return (
 
     <div className='sub-deck'>
@@ -17,9 +20,9 @@ const SubDeck = ({ cards, name, clickHandlerDelete }) => {
           </div>
         ))}
           <div className='input-container'>
-        <input className='question-box' placeholder='question...' />
-        <input className='answer-box' placeholder='answer...' />
-        <button className='add-card-button' onClick={() => addCard(name)}>+ Add Card</button>
+        <input className='question-box' placeholder='question...' value={question} onChange={(e) => setQuestion(e.target.value)}/>
+        <input className='answer-box' placeholder='answer...' value={answer} onChange={(e) => setAnswer(e.target.value)}/>
+        <button className='add-card-button' onClick={() => clickHandlerAddCard(name, question, answer)}>+ Add Card</button>
         <button className='delete-deck-button' onClick={() => clickHandlerDelete(name)}>Delete Deck</button>
         </div>
       </div>
