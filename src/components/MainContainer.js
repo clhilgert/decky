@@ -44,6 +44,15 @@ const MainContainer = () => {
     setDisplayText(questionArr[currentCard]?.question || '');
   }, [currentCard, questionArr]);
 
+  useEffect(() => {
+    if (data.length > 0) {
+      const currentDeckData = data[currentDeck];
+      if (currentDeckData) {
+        setQuestionArr(currentDeckData.flashcards);
+      }
+    }
+  }, [data, currentDeck]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -111,19 +120,57 @@ const MainContainer = () => {
     fetch('http://localhost:5000/api/decks/addcard', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name: name, question: question, answer: answer })
+      body: JSON.stringify({ name: name, question: question, answer: answer }),
     })
-    .then(response => {
-      return response.json();
-    })
+      .then((response) => response.json())
+      .then((updatedDeck) => {
+        setData((prevData) => {
+          const updatedData = prevData.map((deck) => {
+            if (deck.name === name) {
+              return {
+                ...deck,
+                flashcards: updatedDeck.flashcards,
+              };
+            }
+            return deck;
+          });
+          return updatedData;
+        });
+      })
+      .catch((error) => {
+        console.error('Error adding card:', error);
+      });
   }
 
-  // function deleteCard(name) {
-
-  // }
-
+  function deleteCard(name, question) {
+    fetch('http://localhost:5000/api/decks/deletecard', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: name, question: question }),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        const updatedData = data.map((deck) => {
+          if (deck.name === name) {
+            const updatedCards = deck.flashcards.filter((card) => card.question !== question);
+            return {
+              ...deck,
+              flashcards: updatedCards,
+            };
+          }
+          return deck;
+        });
+        setData(updatedData);
+      })
+      .catch((error) => {
+        console.error('Error deleting card:', error);
+      });
+  }
+  
   return (
     
     <div className='outer-container'>
@@ -133,7 +180,7 @@ const MainContainer = () => {
       </div>
       <ButtonContainer clickHandler={changeCard} />
       <DeckContainer decks={data} clickHandler={changeDeck} clickHandlerAlt={addDeck}/>
-      {showSubDeck && <SubDeck cards={questionArr} name={data[currentDeck].name} clickHandlerDelete={deleteDeck} clickHandlerAddCard={addCard} />}
+      {showSubDeck && <SubDeck cards={questionArr} name={data[currentDeck].name} clickHandlerDelete={deleteDeck} clickHandlerAddCard={addCard} clickHandlerDeleteCard={deleteCard}/>}
     </div>
   );
 };

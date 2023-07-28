@@ -39,6 +39,7 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
   font-size: 30px;
   font-weight: bold;
   padding: 10px;
@@ -49,8 +50,10 @@ body::-webkit-scrollbar {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
   box-shadow: 1px 2px 4px rgb(237, 228, 255);
-  transition: 0.4s;
+  transition: filter 0.2s;
+  transition: transform 0.2s;
 }
+
 
 .card:hover {
   /* transform: rotateY(15deg); */

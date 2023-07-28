@@ -1,7 +1,7 @@
 {
   "flashcard_decks": [
     {
-      "deck_name": "General Knowledge",
+      "name": "General Knowledge",
       "flashcards": [
         {
           "question": "What is the capital of France?",

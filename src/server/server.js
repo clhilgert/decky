@@ -47,6 +47,21 @@ app.post('/api/decks/addcard', async (req, res) => {
   }
 })
 
+app.post('/api/decks/deletecard', async (req, res) => {
+  try {
+    const { name, question } = req.body;
+    const deck = await Deck.findOne({ name });
+    const index = deck.flashcards.findIndex((flashcard) => {
+      flashcard.question === question
+    })
+    deck.flashcards.splice(index, 1);
+    await deck.save();
+    return res.status(200).json(deck);
+  } catch (err) {
+    return res.status(500).json({message: 'error'})
+  }
+})
+
 app.post('/api/decks/delete', async (req, res) => {
   try {
     const { name } = req.body;
