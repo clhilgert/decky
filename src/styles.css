@@ -1,5 +1,6 @@
 .title-text {
   display: flex;
+  user-select: none;
   justify-content: center;
   font-size: 40px;
 }
@@ -50,8 +51,7 @@ body::-webkit-scrollbar {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
   box-shadow: 1px 2px 4px rgb(237, 228, 255);
-  transition: filter 0.2s;
-  transition: transform 0.2s;
+  transition: filter 0.2s, transform 0.1s;
 }
 
 
@@ -62,7 +62,7 @@ body::-webkit-scrollbar {
 }
 
 .card:active {
-  transform: rotateY(180deg);
+  transform: rotateX(100deg);
 }
 
 .button-container {
@@ -95,6 +95,7 @@ body::-webkit-scrollbar {
 
 .counter-text {
   display: flex;
+  user-select: none;
   justify-content: flex-end;
   margin-bottom: 0px;
 }
